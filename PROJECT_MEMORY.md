@@ -49,24 +49,27 @@
 
 ## Completed
 - [x] API built and running on port 8892
-- [x] Monitoring dashboard at /dashboard
+- [x] Monitoring dashboard at /dashboard  
 - [x] SEO pages: 72 sizes + sitemap.xml
 - [x] Surge.sh landing page: https://placeholder-api.surge.sh
 - [x] GitHub repo: https://github.com/bootenkotrading/placeholder-image-api
 - [x] npm package built: /home/hermes/workspace/placeholder-api/npm-package/ (needs npm login to publish)
 - [x] pip package built: /home/hermes/workspace/placeholder-api/pip-package/ (needs PyPI token to publish)
 - [x] Gumroad "Placeholder Basic" created (one-time, needs manual conversion to membership)
+- [x] Gumroad webhook handler at /webhooks/gumroad (auto-creates API keys)
+- [x] Marketing templates for HN, Reddit, Dev.to, Product Hunt (MARKETING_TEMPLATES.md)
+- [x] API directory submission templates (API_DIRECTORY_TEMPLATES.md)
+- [x] Cron: Cache cleanup daily at 3am (job_id: bdbae5a21d62)
+- [x] Cron: Health check every 30min with auto-restart (job_id: 3d19b56a9027)
+- [x] Cron: Weekly stats report every Monday 9am (job_id: bab104ac4aa7)
+- [x] All code pushed to GitHub
 
-## TODO - Remaining Tasks
-- [ ] Nginx reverse proxy (needs sudo)
-- [ ] Gumroad: convert to membership products in web UI + create Pro tier
-- [ ] npm publish (needs npm login credentials)
-- [ ] pip publish (needs PyPI API token)
-- [ ] Product Hunt launch
-- [ ] Dev community posts: HN, Reddit, Dev.to
-- [ ] API directory listings: RapidAPI, ProgrammableWeb, APIs.io, PublicAPIs.dev
-- [ ] Alternatives pages: "placeholder.com alternative"
-- [ ] Cross-link from existing online-income network sites
+## TODO - Requires Your Manual Action
+- [ ] Nginx: `sudo cp /home/hermes/workspace/placeholder-api/nginx-placeholder.conf /etc/nginx/sites-enabled/ && sudo nginx -t && sudo systemctl reload nginx`
+- [ ] Gumroad: Log in at app.gumroad.com → convert Placeholder Basic to Membership → create Placeholder Pro membership
+- [ ] npm publish: Login with `npm login` then `cd npm-package && npm publish`
+- [ ] pip publish: Get PyPI token, set TWINE_USERNAME/TWINE_PASSWORD, then `cd pip-package && twine upload dist/*`
+- [ ] Set Gumroad webhook URL: https://placeholder-api.surge.sh/webhooks/gumroad (or http://149.202.58.157:8892/webhooks/gumroad)
 
 ## Server Environment
 - Port 8891 occupied by unknown process (connection reset)

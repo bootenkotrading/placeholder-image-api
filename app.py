@@ -714,6 +714,23 @@ async def generate_image(
 async def generate_simple(request: Request, width: int, height: int, format: str = Query("png")):
     return await generate_image(request, width, height, "cccccc", "666666", format=format)
 
+# SEO: Alternatives pages
+@app.get("/alternatives/", response_class=HTMLResponse)
+async def alternatives_index():
+    """Browse all placeholder image service alternatives"""
+    alt_path = STATIC_DIR / "alternatives" / "index.html"
+    if alt_path.is_file():
+        return HTMLResponse(alt_path.read_text(encoding="utf-8"))
+    return HTMLResponse("<h1>Alternatives not yet generated</h1>", status_code=404)
+
+@app.get("/alternatives/{competitor:path}", response_class=HTMLResponse)
+async def alternatives_page(competitor: str):
+    """SEO page for competitor alternatives"""
+    alt_path = STATIC_DIR / "alternatives" / f"{competitor}.html"
+    if alt_path.is_file():
+        return HTMLResponse(alt_path.read_text(encoding="utf-8"))
+    raise HTTPException(404, "Alternative page not found")
+
 # SEO: Sizes index page
 @app.get("/sizes/", response_class=HTMLResponse)
 async def sizes_index(request: Request):
