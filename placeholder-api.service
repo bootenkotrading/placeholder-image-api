@@ -1,0 +1,14 @@
+[Unit]
+Description=Placeholder Image API
+After=network.target
+
+[Service]
+Type=simple
+User=hermes
+WorkingDirectory=/home/hermes/workspace/placeholder-api
+ExecStart=/home/hermes/.hermes/hermes-agent/venv/bin/python3 -m uvicorn app:app --host 0.0.0.0 --port 8891 --workers 2
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
