@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "placeholder-img"
+version = "1.0.0"
+description = "Client SDK for the Placeholder Image API — generate placeholder images easily"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.7"
+keywords = ["placeholder", "image", "placeholder-image", "api", "sdk", "generator"]
+
+dependencies = [
+    "requests>=2.20",
+    "Pillow>=8.0",
+]
+
+[project.urls]
+Homepage = "https://placeholder-api.surge.sh"
+Repository = "https://github.com/bootenkotrading/placeholder-image-api"

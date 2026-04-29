@@ -801,6 +801,59 @@ async def api_stats():
 async def health():
     return {"status": "ok", "timestamp": datetime.now().isoformat()}
 
+# ── Gumroad Webhook ──
+TIER_MAP = {
+    "placeholder-basic": "basic",
+    "placeholder-pro": "pro",
+}
+
+@app.post("/webhooks/gumroad")
+async def gumroad_webhook(request: Request):
+    """Handle Gumroad sale webhooks — auto-create API keys for premium purchases"""
+    import hmac as hmac_mod
+    import secrets as secrets_mod
+    
+    body = await request.body()
+    form_data = await request.form()
+    payload = dict(form_data)
+    
+    logger.info(f"Gumroad webhook received: {payload.get('product_permalink', 'unknown')}")
+    
+    product_permalink = payload.get("product_permalink", "")
+    email = payload.get("email", "")
+    
+    tier = TIER_MAP.get(product_permalink)
+    if not tier:
+        logger.warning(f"Unknown Gumroad product: {product_permalink}")
+        return {"status": "ignored", "reason": "unknown product"}
+    
+    # Generate API key
+    api_key = f"phl_{secrets_mod.token_hex(16)}"
+    
+    db = get_db()
+    db.execute("INSERT INTO api_keys (key, email, tier) VALUES (?, ?, ?)", (api_key, email, tier))
+    
+    # Log revenue
+    try:
+        amount = float(payload.get("price", 0))
+    except (ValueError, TypeError):
+        amount = 0
+    db.execute("INSERT INTO revenue (source, amount, description) VALUES (?, ?, ?)", 
+               ("gumroad", amount, f"{tier} tier - {email}"))
+    db.commit()
+    db.close()
+    
+    limits = {"basic": 2000, "pro": 10000}
+    logger.info(f"Created {tier} API key for {email}: {api_key[:12]}...")
+    
+    return {
+        "status": "created",
+        "api_key": api_key,
+        "tier": tier,
+        "daily_limit": limits.get(tier, 100),
+        "instructions": f"Append ?key={api_key} to any API request URL"
+    }
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8891)
+    uvicorn.run(app, host="0.0.0.0", port=8892)

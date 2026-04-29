@@ -1,0 +1,80 @@
+Metadata-Version: 2.4
+Name: placeholder-img
+Version: 1.0.0
+Summary: Client SDK for the Placeholder Image API — generate placeholder images easily
+License: MIT
+Project-URL: Homepage, https://placeholder-api.surge.sh
+Project-URL: Repository, https://github.com/bootenkotrading/placeholder-image-api
+Keywords: placeholder,image,placeholder-image,api,sdk,generator
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.20
+Requires-Dist: Pillow>=8.0
+
+# placeholder-img
+
+Python client SDK for the [Placeholder Image API](https://placeholder-api.surge.sh). Generate and download placeholder images with a simple Pythonic API.
+
+## Installation
+
+```bash
+pip install placeholder-img
+```
+
+## Usage
+
+### Create a client
+
+```python
+from placeholder_img import PlaceholderClient
+
+client = PlaceholderClient()
+# With API key or custom base URL:
+# client = PlaceholderClient(api_key="your-key", base_url="http://149.202.58.157:8892")
+```
+
+### Get a placeholder image URL
+
+```python
+url = client.url(300, 200)
+# => "https://placeholder-api.surge.sh/300x200.png"
+
+url = client.url(400, 300, bg_color="336699", text_color="ffffff", text="Hello!", format="jpg")
+# => "https://placeholder-api.surge.sh/400x300.jpg?bg=336699&fg=ffffff&text=Hello!"
+```
+
+### Generate a PIL Image
+
+```python
+img = client.generate(300, 200, bg_color="cc0000")
+img.show()
+```
+
+### Download and save to file
+
+```python
+client.download(300, 200, "placeholder.png")
+client.download(400, 300, "photo.jpg", format="jpg", text="Demo")
+```
+
+## API
+
+### `PlaceholderClient(api_key=None, base_url="https://placeholder-api.surge.sh")`
+
+Creates a new client instance.
+
+### `client.url(width, height, bg_color=None, text_color=None, text=None, format="png")`
+
+Returns the URL string for the placeholder image.
+
+### `client.generate(width, height, bg_color=None, text_color=None, text=None, format="png")`
+
+Downloads the image and returns a `PIL.Image.Image` object.
+
+### `client.download(width, height, filepath, bg_color=None, text_color=None, text=None, format="png")`
+
+Downloads the image and saves it to `filepath`. Returns the file path.
+
+## License
+
+MIT

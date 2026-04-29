@@ -1,0 +1,9 @@
+README.md
+pyproject.toml
+placeholder_img/__init__.py
+placeholder_img/client.py
+placeholder_img.egg-info/PKG-INFO
+placeholder_img.egg-info/SOURCES.txt
+placeholder_img.egg-info/dependency_links.txt
+placeholder_img.egg-info/requires.txt
+placeholder_img.egg-info/top_level.txt

@@ -47,18 +47,25 @@
 - GET /api/v1/usage/{key} — Key usage stats
 - GET /api/v1/stats — API stats JSON
 
+## Completed
+- [x] API built and running on port 8892
+- [x] Monitoring dashboard at /dashboard
+- [x] SEO pages: 72 sizes + sitemap.xml
+- [x] Surge.sh landing page: https://placeholder-api.surge.sh
+- [x] GitHub repo: https://github.com/bootenkotrading/placeholder-image-api
+- [x] npm package built: /home/hermes/workspace/placeholder-api/npm-package/ (needs npm login to publish)
+- [x] pip package built: /home/hermes/workspace/placeholder-api/pip-package/ (needs PyPI token to publish)
+- [x] Gumroad "Placeholder Basic" created (one-time, needs manual conversion to membership)
+
 ## TODO - Remaining Tasks
-- [ ] Nginx reverse proxy (needs sudo - sudo cp nginx-placeholder.conf /etc/nginx/sites-enabled/)
-- [ ] Gumroad products: create basic + pro tiers with webhook for auto key provisioning
-- [ ] Surge.sh static landing page deployment
-- [ ] Programmatically generate SEO pages for common sizes (100+ pages)
-- [ ] GitHub repo + open source release
-- [ ] npm package: placeholder-img
-- [ ] pip package: placeholder-img  
+- [ ] Nginx reverse proxy (needs sudo)
+- [ ] Gumroad: convert to membership products in web UI + create Pro tier
+- [ ] npm publish (needs npm login credentials)
+- [ ] pip publish (needs PyPI API token)
 - [ ] Product Hunt launch
-- [ ] Dev community posts: HN (Show HN), Reddit r/webdev r/SideProject, Dev.to
+- [ ] Dev community posts: HN, Reddit, Dev.to
 - [ ] API directory listings: RapidAPI, ProgrammableWeb, APIs.io, PublicAPIs.dev
-- [ ] Alternatives pages: "placeholder.com alternative", "placekitten alternative"
+- [ ] Alternatives pages: "placeholder.com alternative"
 - [ ] Cross-link from existing online-income network sites
 
 ## Server Environment
